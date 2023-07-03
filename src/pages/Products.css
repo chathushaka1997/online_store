@@ -1,0 +1,29 @@
+.product-container {
+  padding: 10px;
+}
+.product-container .sub-container {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.product-container  a {
+    text-decoration: unset;
+    color: unset;
+  }
+.product-container .sub-container:hover {
+
+    box-shadow: rgb(102, 105, 148) 0px 5px 8px;
+  }
+.product-container .sub-container .details-container p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 50px; /* Maximum height in pixels */
+    text-overflow: ellipsis;
+    
+}
+.product-container img {
+  width: 100%;
+  object-fit: cover;
+  height: 200px;
+}
