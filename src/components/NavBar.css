@@ -1,9 +1,63 @@
-.navlinks-container{
-    min-width:300px
+.navbar-container {
+  background: #f4f4f4;
 }
 
-.navlinks-container a{
- text-decoration: none;
- color: black;
- font-size: 20px;
+.navbar-container h2 {
+  color: #3498db;
+}
+
+.navbar-container .button-container a {
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.navbar-container .button-container img {
+  width: 25px;
+  cursor: pointer;
+}
+
+.navlinks-container {
+  min-width: 500px;
+}
+
+.navlinks-container a {
+  text-decoration: none;
+  color: #3498db;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.searchBar-container {
+  border: 1px solid rgb(211, 211, 211);
+}
+.searchBar-container form {
+  width: 100%;
+  max-width: 500px;
+/*   border: 1px solid rgb(211, 211, 211); */
+  transition: border-color 0.5s ease; /* Apply transition to border-color */
+
+}
+.searchBar-container input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 5px 15px;
+}
+
+.searchBar-container img {
+  width: 20px;
+  object-fit: contain;
+  cursor: pointer;
+  margin-left: 5px;
+
+}
+
+.searchBar-container button {
+  background: #e74c3c;
+  border: none;
+  border-left: 1px solid rgb(211, 211, 211);
+  border-right: 1px solid rgb(211, 211, 211);
+  color: #fcfcfc;
 }
