@@ -1,4 +1,23 @@
-.navOffCanvas img{
-    width: 25px;
-    cursor: pointer;
+.navOffCanvas {
+  width: 25px;
+  cursor: pointer;
+}
+
+.navOffCanvas img {
+  width: 25px;
+  cursor: pointer;
+}
+.offcanvas-body .links div {
+   margin-bottom: 10px;
+  }
+
+.offcanvas-body .links a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #3498db;
+  font-size: 1.3rem;
+}
+
+.offcanvas-body .active {
+  border-bottom: 1px solid #3498db;
 }

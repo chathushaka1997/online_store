@@ -26,8 +26,8 @@ const AddBrand = ({ componentName, isEdit = false }) => {
     event.target.reset();
   };
   return (
-    <div className="container">
-      <h2 className="text-primary fw-bolder mb-3">{componentName}</h2>
+    <div className="container mt-5">
+      <h3 className="text-primary fw-bolder mb-3">{componentName}</h3>
       <div className="">
         <form style={{ maxWidth: "400px" }} className="w-100 border p-4" onSubmit={handleSubmit}>
           {error && (

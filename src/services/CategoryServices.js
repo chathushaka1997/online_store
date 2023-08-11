@@ -6,21 +6,18 @@ export class CategoryServices {
   static async createCategory(categoryData) {
     const ep = Util.apiAuthUrl("category/create");
     const res = await axios.post(ep, categoryData);
-    if (res.success) {
-      console.log(res);
-    } else {
-      console.log(res);
-    }
+    return res;
+  }
+
+  static async editCategory(categoryData) {
+    const ep = Util.apiAuthUrl("category/update");
+    const res = await axios.post(ep, categoryData);
     return res;
   }
 
   static async getCategories() {
-    const ep = Util.apiAuthUrl("category/get");
-
+    const ep = Util.apiPublicUrl("category/get");
     const res = await axios.get(ep);
-
-    console.log(res);
-
     return res;
   }
   

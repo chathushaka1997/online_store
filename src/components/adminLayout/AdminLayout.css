@@ -1,0 +1,14 @@
+.admin-layout-container {
+  display: flex;
+  flex: 1;
+}
+.admin-layout-container .sidebar {
+  width: 250px;
+  color: #fff;
+  height: 100%;
+}
+.admin-layout-container .content {
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+}

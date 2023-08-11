@@ -16,9 +16,11 @@ const useFilterProducts = () => {
     setFilteredArray(products);
     if (keyword) {
       setFilteredArray((prevState) => {
-        return prevState.filter((product) => {
-          const productValues = Object.values(product);
-          return productValues.some((value) => String(value).toLowerCase().includes(keyword.toLowerCase()));
+        const searchTerm = keyword.toLowerCase();
+        return prevState.filter(product => {
+          const title = product.title.toLowerCase();
+          const keywords = searchTerm.split(" ");
+          return keywords.every(keyword => title.includes(keyword));
         });
       });
     }
@@ -52,7 +54,8 @@ const useFilterProducts = () => {
     }
   }, [keyword, products,brand,category,inStock,rating]);
 
-  return [filteredArray];
+
+  return [filteredArray,keyword];
 };
 
 export default useFilterProducts;

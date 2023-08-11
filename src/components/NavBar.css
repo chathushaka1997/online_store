@@ -6,13 +6,7 @@
   color: #3498db;
 }
 
-.navbar-container .button-container a {
-  color: #e74c3c;
-  font-weight: bold;
-  font-size: 20px;
-  text-decoration: none;
-  margin-left: 20px;
-}
+
 .navbar-container .button-container img {
   width: 25px;
   cursor: pointer;
@@ -28,7 +22,9 @@
   font-size: 18px;
   font-weight: 600;
 }
-
+.navlinks-container  .active {
+ border-bottom: 1px solid #e74c3c;
+}
 .searchBar-container {
   border: 1px solid rgb(211, 211, 211);
 }
@@ -59,5 +55,41 @@
   border: none;
   border-left: 1px solid rgb(211, 211, 211);
   border-right: 1px solid rgb(211, 211, 211);
+  color: #fcfcfc;
+}
+
+.searchBar-container-inline{
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 15px;
+}
+
+.searchBar-container-inline form {
+  display: flex;
+  width: 100%;
+  min-width: 300px;
+/*   border: 1px solid rgb(211, 211, 211); */
+  transition: border-color 0.5s ease; /* Apply transition to border-color */
+
+}
+.searchBar-container-inline input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 5px 15px;
+  background: inherit;
+}
+
+.searchBar-container-inline img {
+  width: 20px;
+  object-fit: contain;
+  cursor: pointer;
+  margin-left: 5px;
+
+}
+
+.searchBar-container-inline button {
+  background: inherit;
+  border: none;
+
   color: #fcfcfc;
 }

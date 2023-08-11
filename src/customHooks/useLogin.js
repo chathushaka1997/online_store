@@ -1,8 +1,10 @@
 import  { useState } from "react";
 import { UserServices } from "../services/UserServices";
+import { useAuth } from "../components/authenticationComps/auth";
 
 const useLogin = () => {
   const [error, setError] = useState("");
+  const auth = useAuth();
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
@@ -15,6 +17,7 @@ const useLogin = () => {
       const response = await UserServices.login(reqData);
       console.log(response);
       if (response.success) {
+        auth.getUserData()
       } else {
         setError(response?.error || "Registration failed");
       }

@@ -1,10 +1,10 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Dasboard from "./pages/Dasboard";
 import Products from "./pages/products/Products";
 import NavBar from "./components/NavBar";
-import ViewProduct from "./pages/ViewProduct";
+import ViewProduct from "./pages/viewProduct/ViewProduct";
 import AddProduct from "./pages/addProduct/AddProduct";
 import SplitScreen from "./pages/splitScreen/SplitScreen";
 import LeftHandComponent from "./pages/splitScreen/LeftHandComponent";
@@ -25,6 +25,17 @@ import AddTag from "./pages/addProduct/AddTag";
 import Footer from "./components/Footer";
 import ViewAllBrands from "./pages/brand/ViewAllBrands";
 import ViewAllProducts from "./pages/ViewAllProducts";
+import ScrollToTop from "./components/ScrollToTop";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import ConnectionAwaiter from "./components/ConnectionAwaiter";
+import AdminLayout from "./components/adminLayout/AdminLayout";
+import SideBarContainer from "./components/adminLayout/SideBarContainer";
+import ContentContainer from "./components/adminLayout/ContentContainer";
+import SideBar from "./components/AdminSidebar/SideBar";
+import PublicRoutes from "./components/authenticationComps/PublicRoutes";
+import ViewAllCategories from "./pages/category/ViewAllCategories";
+import ViewAllTags from "./pages/tag/ViewAllTags";
 
 const people = [
   {
@@ -70,27 +81,39 @@ const products = [
 function App() {
   return (
     <div className="App">
-      <div className="app-wrapper d-flex flex-column min-vh-100">
+   {/*    <ConnectionAwaiter /> */}
+      <div className="d-flex flex-column min-vh-100">
         <AuthProvider>
           <NavBar />
           <div className="flex-grow-1">
             <Routes>
               <Route element={<Dasboard shouldFocus={true} />} path="/" />
-              <Route element={<Register />} path="/register" />
-              <Route element={<Login />} path="/login" />
+
               <Route element={<Products />} path="/products" />
-
+              <Route element={<AboutUs />} path="/about-us" />
+              <Route element={<ContactUs />} path="/contact-us" />
               <Route element={<ViewProduct />} path="/product/:id" />
-
+              <Route element={<PublicRoutes />}>
+                <Route element={<Register />} path="/register" />
+                <Route element={<Login />} path="/login" />
+              </Route>
               <Route element={<RequireAuth />}>
-                <Route element={<AddProduct componentName={"Add Product"} />} path="/add-product" />
-                <Route element={<AddProduct componentName={"Edit Product"} isEdit={true} />} path="/edit-product/:id" />
-                <Route element={<AddCategory />} path="/add-category" />
-                <Route element={<AddBrand componentName={"Add Brand"} />} path="/add-brand" />
-                <Route element={<AddBrand componentName={"Edit Brand"} isEdit={true} />} path="/edit-brand/:id" />
-                <Route element={<AddTag />} path="/add-tag" />
-                <Route element={<ViewAllBrands />} path="/all-brands" />
-                <Route element={<ViewAllProducts />} path="/all-products" />
+                <Route element={<AdminLayout />}>
+                  <Route element={<ContentContainer />}>
+                    <Route element={<AddProduct componentName={"Add Product"} />} path="/add-product" />
+                    <Route element={<AddProduct componentName={"Edit Product"} isEdit={true} />} path="/edit-product/:id" />
+                    <Route element={<AddCategory componentName={"Add Category"}/>} path="/add-category" />
+                    <Route element={<AddCategory componentName={"Edit Category"} isEdit={true}/>} path="/edit-category/:id" />
+                    <Route element={<AddBrand componentName={"Add Brand"} />} path="/add-brand" />
+                    <Route element={<AddBrand componentName={"Edit Brand"} isEdit={true} />} path="/edit-brand/:id" />
+                    <Route element={<AddTag componentName={"Add Tag"} />} path="/add-tag" />
+                    <Route element={<AddTag componentName={"Edit Tag"} isEdit={true}/>} path="/edit-tag/:id" />
+                    <Route element={<ViewAllBrands />} path="/all-brands" />
+                    <Route element={<ViewAllProducts />} path="/all-products" />
+                    <Route element={<ViewAllCategories />} path="/admin/category/view-all" />
+                    <Route element={<ViewAllTags />} path="/admin/tag/view-all" />
+                  </Route>
+                </Route>
               </Route>
               <Route
                 element={
@@ -111,11 +134,13 @@ function App() {
                 }
                 path="/modal"
               />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
           <Footer />
         </AuthProvider>
       </div>
+      <ScrollToTop />
       <ToastContainer
         position="top-right"
         autoClose={5000}

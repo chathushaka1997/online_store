@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import menuIcon from "../assests/icons/menu.png";
-import './NavbarOffCanvas.css'
+import "./NavbarOffCanvas.css";
 
 const NavbarOffCanvas = () => {
   const [show, setShow] = useState(false);
@@ -15,17 +15,25 @@ const NavbarOffCanvas = () => {
 
       <Offcanvas style={{ width: "250px" }} show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="">
-            <Link to={"/"}>Home</Link>
-            <br />
-            <Link to={"/products"}>All Products</Link>
-            <br />
-            <Link to={"/add-product"}>Add Product</Link>
-            <br />
-            <Link to={"/login"}>Login</Link>
+          <div className="links">
+            <div>
+              <NavLink to={"/"} onClick={handleClose}>Home</NavLink>
+            </div>
+
+            <div>
+              <NavLink to={"/products"} onClick={handleClose}>All Products</NavLink>
+            </div>
+
+            <div>
+              <NavLink to={"/add-product"} onClick={handleClose}>Add Product</NavLink>
+            </div>
+
+            <div>
+              <NavLink to={"/login"} onClick={handleClose}>Login</NavLink>
+            </div>
           </div>
         </Offcanvas.Body>
       </Offcanvas>

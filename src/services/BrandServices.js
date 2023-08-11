@@ -15,7 +15,7 @@ export class BrandServices {
   }
 
   static async getBrands() {
-    const ep = Util.apiAuthUrl("brand/get");
+    const ep = Util.apiPublicUrl("brand/get");
     const res = await axios.get(ep);
     return res;
   }

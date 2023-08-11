@@ -12,21 +12,20 @@ import useTags from "../../customHooks/useTags";
 import useProducts from "../../customHooks/useProducts";
 
 const AddProduct = ({ componentName, isEdit = false }) => {
-  const { fetchAllCategories } = useCategory();
   const { id } = useParams();
   const { createNewProduct, getProductById, error, handleEditProduct } = useProducts();
   const { brands } = useBrands();
-  const { fetchAllTags } = useTags();
+  const { categories } = useCategory();
+  const { tags } = useTags();
   const [formValues, setFormValues] = useState(null);
 
   const [handleUpload, imgUploadError, isImageUploading] = useImageUpload();
-  const [categories, setCategories] = useState([]);
-  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     if (id) {
       const selectedProduct = getProductById(id);
       if (selectedProduct) {
+        console.log("Form values setted");
         setFormValues({
           ...selectedProduct,
           brand: selectedProduct?.brand?._id,
@@ -35,22 +34,7 @@ const AddProduct = ({ componentName, isEdit = false }) => {
         });
       }
     }
-  }, [id, brands]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const categories = await fetchAllCategories();
-      const optionsList = categories.map((category) => ({ label: category.name, value: category._id }));
-      setCategories(optionsList);
-    };
-    const fetchTags = async () => {
-      const tags = await fetchAllTags();
-      const optionsList = tags.map((brand) => ({ label: brand.name, value: brand._id }));
-      setTags(optionsList);
-    };
-    fetchCategories();
-    fetchTags();
-  }, []);
+  }, [id, brands, tags, categories]);
 
   const converToOptionList = (Array) => {
     return Array?.map((item) => ({ label: item.name, value: item._id }));
@@ -77,7 +61,7 @@ const AddProduct = ({ componentName, isEdit = false }) => {
   });
 
   const onSubmit = async (values, onSubmitProps) => {
-    console.log(values);
+    //console.log(values);
 
     if (isEdit) {
       handleEditProduct(values);
@@ -97,13 +81,12 @@ const AddProduct = ({ componentName, isEdit = false }) => {
   };
 
   const getTagOptionById = (ids, tags) => {
-    const tagList = tags.filter((tag) => ids?.includes(tag?._id));
-    console.log(tagList);
-    return tagList.map((tag) => ({ value: tag._id, label: tag.name }));
+    const tagList = tags.filter((tag) => ids?.includes(tag?.value));
+    return tagList;
   };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <h3 className="mb-3 text-primary fw-bolder">{componentName}</h3>
       <div className=" border p-4 ">
         <Formik initialValues={formValues || initialValues} validationSchema={validationSchema} onSubmit={onSubmit} enableReinitialize>
@@ -134,17 +117,24 @@ const AddProduct = ({ componentName, isEdit = false }) => {
                     <label htmlFor="category" className="fw-bold">
                       Tags
                     </label>
-                    <Select
-                      options={tags}
-                      onChange={(selectedOptions) => {
-                        formik.setFieldValue("tags", onMultiSelectChange(selectedOptions));
-                      }}
-                      isMulti // Enable multi-select
-                      placeholder="Select Tags"
-                      value={() => {
-                        const data = getTagOptionById(formik.values.tags, tags);
-                        console.log(data);
-                        return data;
+                    <Field
+                      name="tags"
+                      label="Tags"
+                      component={({ field, form }) => {
+                        const initialSelectedTags = getTagOptionById(formik.values.tags, converToOptionList(tags));
+
+                        return (
+                          <Select
+                            {...field}
+                            value={initialSelectedTags} // Set initial selected values here
+                            options={converToOptionList(tags)}
+                            isMulti
+                            placeholder="Select Tags"
+                            onChange={(selectedOptions) => {
+                              form.setFieldValue("tags", onMultiSelectChange(selectedOptions));
+                            }}
+                          />
+                        );
                       }}
                     />
                     <ErrorMessage name="tags">{(errorMsg) => <div className="text-danger">{errorMsg}</div>}</ErrorMessage>
@@ -160,7 +150,7 @@ const AddProduct = ({ componentName, isEdit = false }) => {
                       <option className="text-secondary" value={""}>
                         Select Category
                       </option>
-                      {categories.map((brand) => (
+                      {converToOptionList(categories).map((brand) => (
                         <option key={brand.value} value={brand.value}>
                           {brand.label}
                         </option>

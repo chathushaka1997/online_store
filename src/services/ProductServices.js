@@ -3,7 +3,7 @@ import { Util } from "../Util";
 
 export class ProductService {
   static async getAllProducts() {
-    const url = Util.apiAuthUrl("product/get");
+    const url = Util.apiPublicUrl("product/get");
     const res = await axios.get(url);
     return res;
   }
